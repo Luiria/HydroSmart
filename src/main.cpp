@@ -1,15 +1,22 @@
 #include <Arduino.h>
 
+#include "humidity.h"
+
 #include "DHTesp.h"
 #include <WiFi.h>
-#include <WebServer.h>
-#include "AdafruitIO_WiFi.h"
+#include <WebServer.h>      
 
-void setup() {
-  
+#include "AdafruitIO_WiFi.h"   
+
+
+
+void setup()
+{
+  initDHT();
 }
 
-void loop() {
-
+void loop()
+{
+  readHumidity();
+  delay(2000);
 }
-

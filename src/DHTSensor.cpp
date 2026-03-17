@@ -1,20 +1,16 @@
-#include "humidity.h"
-#include <Arduino.h>
+#include "DHTSensor.hpp"
 
-DHTesp dht;
+DHTSensor::DHTSensor(uint8_t pin, DHTesp::DHT_MODEL_t type) : pin(pin), type(type) {}
 
-void initDHT()
+
+void DHTSensor::begin()
 {
-    Serial.begin(115200);
-    Serial.println();
-    Serial.println("Status\tHumidity (%)\tTemperature (C)\t(F)\tHeatIndex (C)\t(F)");
+    dht.setup(pin, type);
     String thisBoard = ARDUINO_BOARD;
     Serial.println(thisBoard);
-
-    dht.setup(14, DHTesp::DHT22);
 }
 
-void readHumidity()
+void DHTSensor::read()
 {
     delay(dht.getMinimumSamplingPeriod());
 
@@ -32,5 +28,4 @@ void readHumidity()
     Serial.print(dht.computeHeatIndex(temperature, humidity, false), 1);
     Serial.print("\t\t");
     Serial.println(dht.computeHeatIndex(dht.toFahrenheit(temperature), humidity, true), 1);
-    delay(2000);
 }

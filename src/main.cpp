@@ -1,22 +1,24 @@
 #include <Arduino.h>
 
-#include "humidity.h"
-
 #include "DHTesp.h"
 #include <WiFi.h>
-#include <WebServer.h>      
+#include <WebServer.h>
+#include "AdafruitIO_WiFi.h"
 
-#include "AdafruitIO_WiFi.h"   
+#include "DHTSensor.hpp"
 
-
+DHTSensor sensor(14, DHTesp::DHT22);
 
 void setup()
 {
-  initDHT();
+  Serial.begin(115200);
+  sensor.begin();
+  Serial.println();
+  Serial.println("Status\tHumidity (%)\tTemperature (C)\t(F)\tHeatIndex (C)\t(F)");
 }
 
 void loop()
 {
-  readHumidity();
+  sensor.read();
   delay(2000);
 }

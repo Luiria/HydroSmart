@@ -22,12 +22,13 @@
 #define WIFI_SSID WIFI_SSID
 #define WIFI_PASS WIFI_PASS 
 
+Led ledConnectedToAdafruit(2);
+
+int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
+
 DHTSensor sensor(14, DHTesp::DHT22);
 UltraSonicSensor ultraSonicSensor(27, 26);
 LedBarGraph ledBarGraph(ledPins);
-
-Led ledConnectedToAdafruit(2);
-int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
 
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
@@ -43,7 +44,7 @@ void setup()
 
   sensor.begin();
   ledConnectedToAdafruit.begin();
-  
+
   ultraSonicSensor.begin();
   ledBarGraph.begin();
   ledBarGraph.initLed();

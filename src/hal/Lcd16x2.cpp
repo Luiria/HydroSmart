@@ -1,25 +1,25 @@
-#ifndef LCD_H
-#define LCD_H
+#include "Lcd16x2.hpp"
 
-#include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
+Lcd16x2::Lcd16x2(uint8_t address) : lcd(address, 16, 2) {};
 
-class Lcd16x2
+void Lcd16x2::begin()
 {
-private:
-    
-public:
-    Lcd16x2(/* args */);
-    ~Lcd16x2();
-};
-
-Lcd16x2::Lcd16x2(/* args */)
-{
+    lcd.init();
+    lcd.backlight();
+    lcd.print("Initializing...");
+    delay(2000);
+    lcd.clear();
 }
 
-Lcd16x2::~Lcd16x2()
+void Lcd16x2::showTempAndHumidity(int level, int distance)
 {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Niv:");
+    lcd.print(level); 
+    lcd.print("%");
+    lcd.setCursor(0, 1);
+    lcd.print("Dist:");
+    lcd.print(distance);
+    lcd.print("cm");
 }
-
-
-#endif

@@ -13,6 +13,7 @@
 #include "./hal/Led.hpp"
 #include "./hal/LedBarGraph.hpp"
 #include "./hal/UltraSonicSensor.hpp"
+#include "./hal/Lcd16x2.hpp"
 
 #include "infra/AdafruitPublisher.hpp"
 
@@ -25,6 +26,8 @@
 Led ledConnectedToAdafruit(12);
 Led ledWaterTank(13);
 
+Lcd16x2 lcd(0x27);
+
 int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 25, 33, 23};
 
 DHTSensor sensor(14, DHTesp::DHT22);
@@ -34,7 +37,8 @@ LedBarGraph ledBarGraph(ledPins);
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
 ClimateController climat(sensor, *publisher, ledConnectedToAdafruit);
-TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank);
+TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcd);
+
 
 void setup()
 {
@@ -46,11 +50,15 @@ void setup()
   sensor.begin();
   ledConnectedToAdafruit.begin();
 
+  Wire.begin(21,22);
+  lcd.begin();
+
   ultraSonicSensor.begin();
   ledBarGraph.begin();
   ledBarGraph.initLed();
 
   ledWaterTank.begin();
+
 }
 
 void loop()
@@ -59,6 +67,4 @@ void loop()
   climat.update();
 
   tankController.update();
-  
-  delay(5000);
 }

@@ -6,10 +6,10 @@
 #include "AdafruitIO_WiFi.h"
 
 #include "secret.hpp"
-#include "ClimateController.hpp"
+#include "app/ClimateController.hpp"
 
-#include "DHTSensor.hpp"
-#include "AdafruitPublisher.hpp"
+#include "hal/DHTSensor.hpp"
+#include "infra/AdafruitPublisher.hpp"
 
 DHTSensor sensor(14, DHTesp::DHT22);
 

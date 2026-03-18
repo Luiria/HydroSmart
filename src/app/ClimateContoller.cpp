@@ -1,9 +1,9 @@
 #include <Arduino.h>
 
-#include "DHTSensor.hpp"
-#include "IDataPublisher.hpp"
+#include "./hal/DHTSensor.hpp"
+#include "./infra/AdafruitPublisher.hpp"
 
-#include "ClimateController.hpp"
+#include "./app/ClimateController.hpp"
 
 ClimateController::ClimateController(DHTSensor &s, IDataPublisher &p) : sensor(s), publisher(p) {};
 

@@ -1,8 +1,8 @@
 #ifndef CLIMATECONTROLLER_H
 #define CLIMATECONTROLLER_H
 
-#include "DHTSensor.hpp"
-#include "IDataPublisher.hpp"
+#include "./hal/DHTSensor.hpp"
+#include "./infra/IDataPublisher.hpp"
 
 class ClimateController
 {

@@ -7,14 +7,14 @@
 
 #include "secret.hpp"
 #include "app/ClimateController.hpp"
+#include "./app/TankController.hpp"
 
 #include "hal/DHTSensor.hpp"
 #include "./hal/Led.hpp"
+#include "./hal/LedBarGraph.hpp"
+#include "./hal/UltraSonicSensor.hpp"
 
 #include "infra/AdafruitPublisher.hpp"
-
-DHTSensor sensor(14, DHTesp::DHT22);
-Led ledConnectedToAdafruit(2);
 
 #define IO_USERNAME AdafruitIO_Username
 #define IO_KEY AdafruitIO_API_KEY
@@ -22,8 +22,17 @@ Led ledConnectedToAdafruit(2);
 #define WIFI_SSID WIFI_SSID
 #define WIFI_PASS WIFI_PASS 
 
+DHTSensor sensor(14, DHTesp::DHT22);
+UltraSonicSensor ultraSonicSensor(27, 26);
+LedBarGraph ledBarGraph(ledPins);
+
+Led ledConnectedToAdafruit(2);
+int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
+
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
+
 ClimateController climat(sensor, *publisher, ledConnectedToAdafruit);
+TankController tankController(ultraSonicSensor, ledBarGraph);
 
 void setup()
 {
@@ -31,13 +40,20 @@ void setup()
   Serial.println();
 
   publisher->begin();
+
   sensor.begin();
   ledConnectedToAdafruit.begin();
+  
+  ultraSonicSensor.begin();
+  ledBarGraph.begin();
+  ledBarGraph.initLed();
 }
 
 void loop()
 {
   publisher->run();
   climat.update();
+
+  tankController.update();
   delay(5000);
 }

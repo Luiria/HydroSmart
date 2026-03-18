@@ -22,10 +22,10 @@
 #define WIFI_SSID WIFI_SSID
 #define WIFI_PASS WIFI_PASS
 
-Led ledConnectedToAdafruit(2);
-Led ledWaterTank(15);
+Led ledConnectedToAdafruit(12);
+Led ledWaterTank(13);
 
-int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
+int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 25, 33, 23};
 
 DHTSensor sensor(14, DHTesp::DHT22);
 UltraSonicSensor ultraSonicSensor(27, 26);

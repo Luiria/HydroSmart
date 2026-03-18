@@ -12,6 +12,7 @@ private:
     int distance;
     int level;
 
+    // Distances entre le capteur avec niveau haut et niveau bas du réservoir
     int tankMinDistance;
     int tankMaxDistance;
 

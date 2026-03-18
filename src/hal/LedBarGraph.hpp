@@ -11,6 +11,7 @@ public:
     LedBarGraph(int ledPins[], int size = 10);
     void begin();
     void initLed();
+    void update(int level);
 };
 
 #endif

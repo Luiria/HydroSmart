@@ -18,7 +18,7 @@
       "id": "bargraph1",
       "top": -600,
       "left": 734.4,
-      "attrs": { "color": "lime" }
+      "attrs": { "color": "GYR" }
     },
     {
       "type": "wokwi-resistor",

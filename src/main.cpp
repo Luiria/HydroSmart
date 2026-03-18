@@ -1,18 +1,25 @@
 #include <Arduino.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#include "./hal/UltraSonicSensor.hpp"
+#include "./hal/LedBarGraph.hpp"
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
+
+UltraSonicSensor sonicSensor(27, 26);
+LedBarGraph ledBarGraph(ledPins);
+
+void setup()
+{
+  Serial.begin(115200);
+  Serial.println();
+
+  sonicSensor.begin();
+  ledBarGraph.begin();
+  ledBarGraph.initLed();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void loop()
+{
+  sonicSensor.read();
+  delay(5000);
 }

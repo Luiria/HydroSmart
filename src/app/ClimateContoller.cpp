@@ -5,7 +5,9 @@
 
 #include "./app/ClimateController.hpp"
 
-ClimateController::ClimateController(DHTSensor &s, IDataPublisher &p, Led &led) : sensor(s), publisher(p), led(led) {};
+ClimateController::ClimateController(DHTSensor &s, IDataPublisher &p,
+                                     Led &led, Potentiometer &potentiometer, Lcd16x2 &lcd)
+    : dht(s), publisher(p), led(led), potentiometer(potentiometer), lcd(lcd) {};
 
 void ClimateController::update()
 {
@@ -16,8 +18,16 @@ void ClimateController::update()
     }
 
     this->led.on();
-    sensor.read();
+    dht.read();
+    potentiometer.read();
 
-    publisher.sendData("temperature", sensor.getTemperature());
-    publisher.sendData("humidity", sensor.getHumidity());
+    int groudTemp = this->potentiometer.getValuePourcent();
+
+    int AirTemp = this->dht.getTemperature();
+    int AirHum = this->dht.getHumidity();
+
+    lcd.showDataGroudAndAir(groudTemp, AirTemp, AirHum);
+
+    publisher.sendData("temperature", dht.getTemperature());
+    publisher.sendData("humidity", dht.getHumidity());
 }

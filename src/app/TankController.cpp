@@ -17,5 +17,5 @@ void TankController::update()
     int distance = this->ultraSonicSensor.getDistance();
     int level = this->ultraSonicSensor.getLevel();
 
-    lcd.showTempAndHumidity(level, distance);
+    lcd.showDataWaterTank(level, distance);
 }

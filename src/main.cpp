@@ -14,6 +14,7 @@
 #include "./hal/LedBarGraph.hpp"
 #include "./hal/UltraSonicSensor.hpp"
 #include "./hal/Lcd16x2.hpp"
+#include "./hal/Potentiometer.hpp"
 
 #include "infra/AdafruitPublisher.hpp"
 
@@ -26,7 +27,10 @@
 Led ledConnectedToAdafruit(12);
 Led ledWaterTank(13);
 
-Lcd16x2 lcd(0x27);
+Lcd16x2 lcdWaterTank(0x27);
+Lcd16x2 lcdClimatSensors(0x26);
+
+Potentiometer potentiometer(32);
 
 int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 25, 33, 23};
 
@@ -36,9 +40,8 @@ LedBarGraph ledBarGraph(ledPins);
 
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
-ClimateController climat(sensor, *publisher, ledConnectedToAdafruit);
-TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcd);
-
+ClimateController climat(sensor, *publisher, ledConnectedToAdafruit, potentiometer, lcdClimatSensors);
+TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcdWaterTank);
 
 void setup()
 {
@@ -50,15 +53,15 @@ void setup()
   sensor.begin();
   ledConnectedToAdafruit.begin();
 
-  Wire.begin(21,22);
-  lcd.begin();
+  Wire.begin(21, 22);
+  lcdWaterTank.begin();
+  lcdClimatSensors.begin();
 
   ultraSonicSensor.begin();
   ledBarGraph.begin();
   ledBarGraph.initLed();
 
   ledWaterTank.begin();
-
 }
 
 void loop()

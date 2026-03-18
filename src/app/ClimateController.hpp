@@ -2,6 +2,7 @@
 #define CLIMATECONTROLLER_H
 
 #include "./hal/DHTSensor.hpp"
+#include "./hal/Led.hpp"
 #include "./infra/IDataPublisher.hpp"
 
 class ClimateController
@@ -9,9 +10,10 @@ class ClimateController
 private:
     DHTSensor &sensor;
     IDataPublisher &publisher;
+    Led &led;
 
 public:
-    ClimateController(DHTSensor &s, IDataPublisher &p);
+    ClimateController(DHTSensor &s, IDataPublisher &p, Led &led);
     void update();
 };
 

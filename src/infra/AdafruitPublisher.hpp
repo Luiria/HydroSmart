@@ -21,4 +21,5 @@ public:
     void begin() override;
     void run() override;
     void sendData(const char *feedName, float value) override;
+    bool isConnected() override;
 };

@@ -31,3 +31,7 @@ void AdafruitPublisher::sendData(const char *feedName, float value)
     if (feed)
         feed->save(value);
 }
+
+bool AdafruitPublisher::isConnected(){
+    return this->io->status() >= AIO_CONNECTED;
+}

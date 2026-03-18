@@ -13,6 +13,7 @@ public:
     void begin();
     void on();
     void off();
+    void blink();
 };
 
 #endif

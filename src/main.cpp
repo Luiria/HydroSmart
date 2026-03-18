@@ -20,9 +20,10 @@
 #define IO_KEY AdafruitIO_API_KEY
 
 #define WIFI_SSID WIFI_SSID
-#define WIFI_PASS WIFI_PASS 
+#define WIFI_PASS WIFI_PASS
 
 Led ledConnectedToAdafruit(2);
+Led ledWaterTank(15);
 
 int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 21, 22, 23};
 
@@ -33,7 +34,7 @@ LedBarGraph ledBarGraph(ledPins);
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
 ClimateController climat(sensor, *publisher, ledConnectedToAdafruit);
-TankController tankController(ultraSonicSensor, ledBarGraph);
+TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank);
 
 void setup()
 {
@@ -48,6 +49,8 @@ void setup()
   ultraSonicSensor.begin();
   ledBarGraph.begin();
   ledBarGraph.initLed();
+
+  ledWaterTank.begin();
 }
 
 void loop()
@@ -56,5 +59,6 @@ void loop()
   climat.update();
 
   tankController.update();
+  
   delay(5000);
 }

@@ -11,8 +11,20 @@
       "left": 186.6,
       "attrs": { "temperature": "30.5", "humidity": "69" }
     },
-    { "type": "wokwi-led", "id": "led1", "top": -771.6, "left": 455, "attrs": { "color": "red" } },
-    { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": -430.5, "left": 101.5, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -771.6,
+      "left": 435.8,
+      "attrs": { "color": "blue" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": -430.5,
+      "left": 101.5,
+      "attrs": { "distance": "242" }
+    },
     {
       "type": "wokwi-led-bar-graph",
       "id": "bargraph1",
@@ -89,7 +101,8 @@
       "top": -620.05,
       "left": 576,
       "attrs": { "value": "220" }
-    }
+    },
+    { "type": "wokwi-led", "id": "led2", "top": -762, "left": 762.2, "attrs": { "color": "red" } }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -98,9 +111,6 @@
     [ "dht2:GND", "esp:GND.1", "black", [ "v124.8", "h86.25" ] ],
     [ "dht2:SDA", "esp:14", "#8f4814", [ "v0" ] ],
     [ "led1:A", "esp:2", "red", [ "v0" ] ],
-<<<<<<< HEAD
-    [ "esp:GND.2", "led1:C", "black", [ "v0" ] ]
-=======
     [ "esp:GND.2", "led1:C", "black", [ "v0" ] ],
     [ "esp:5V", "ultrasonic1:VCC", "red", [ "h0.15", "v192", "h-163.2" ] ],
     [ "esp:GND.1", "ultrasonic1:GND", "black", [ "h-28.65", "v201.6", "h-105.6", "v-28.8" ] ],
@@ -135,8 +145,9 @@
     [ "bargraph1:C4", "bargraph1:C3", "black", [ "h19.42", "v-9.6" ] ],
     [ "bargraph1:C4", "bargraph1:C5", "black", [ "h19.42", "v9.61" ] ],
     [ "bargraph1:C6", "bargraph1:C5", "black", [ "h19.42", "v-9.6" ] ],
-    [ "bargraph1:C6", "bargraph1:C7", "black", [ "h19.42", "v9.6" ] ]
->>>>>>> feature/water_storage
+    [ "bargraph1:C6", "bargraph1:C7", "black", [ "h19.42", "v9.6" ] ],
+    [ "esp:GND.2", "led2:C", "black", [ "v-86.4", "h66.8" ] ],
+    [ "esp:15", "led2:A", "red", [ "v0", "h38.4", "v-220.8", "h316.8" ] ]
   ],
   "dependencies": {}
 }

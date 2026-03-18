@@ -13,3 +13,10 @@ void Led::on(){
 void Led::off(){
     digitalWrite(this->pin, LOW);
 }
+
+void Led::blink(){
+    digitalWrite(this->pin, HIGH);
+    delay(500);
+    digitalWrite(this->pin, LOW);
+
+}

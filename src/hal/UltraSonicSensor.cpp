@@ -26,10 +26,6 @@ void UltraSonicSensor::read()
     // Calculating the distance
     distance = duration * 0.034 / 2;
 
-    // Prints the distance on the Serial Monitor
-    Serial.print("Distance: ");
-    Serial.println(distance);
-
     this->setLevel();
 }
 
@@ -49,7 +45,4 @@ void UltraSonicSensor::setLevel()
         // calul %
         level = map(distance, tankMaxDistance, tankMinDistance, 0, 100);
 
-    Serial.print("Niveau du réservoir: ");
-    Serial.print(level);
-    Serial.println("%");
 }

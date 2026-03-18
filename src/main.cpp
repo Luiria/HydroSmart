@@ -16,8 +16,8 @@ DHTSensor sensor(14, DHTesp::DHT22);
 #define IO_USERNAME AdafruitIO_Username
 #define IO_KEY AdafruitIO_API_KEY
 
-#define WIFI_SSID "Wokwi-GUEST"
-#define WIFI_PASS ""
+#define WIFI_SSID WIFI_SSID
+#define WIFI_PASS WIFI_PASS 
 
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 ClimateController climat(sensor, *publisher);

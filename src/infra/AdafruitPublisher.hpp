@@ -13,8 +13,6 @@ private:
     const char *pass;
 
     AdafruitIO_WiFi *io;
-    AdafruitIO_Feed *temperature;
-    AdafruitIO_Feed *humidity;
 
 public:
     AdafruitPublisher(const char *username, const char *key, const char *ssid, const char *pass);

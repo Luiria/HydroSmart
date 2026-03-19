@@ -32,6 +32,8 @@ void ClimateController::update()
 
     lcd.showDataGroudAndAir(groundTemp, groundHum, AirTemp, AirHum);
 
-    publisher.sendData("temperature", dht.getTemperature());
-    publisher.sendData("humidity", dht.getHumidity());
+    publisher.sendData("air_temperature", dht.getTemperature());
+    publisher.sendData("air_humidity", dht.getHumidity());
+    publisher.sendData("ground_temperature", this->groundTempSensor.getTemperature());
+    publisher.sendData("ground_humidity", this->potentiometer.getValuePourcent());
 }

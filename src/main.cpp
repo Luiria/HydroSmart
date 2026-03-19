@@ -45,7 +45,7 @@ LedBarGraph ledBarGraph(ledPins);
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
 ClimateController climat(sensor, *publisher, ledConnectedToAdafruit, potentiometer, lcdClimatSensors, groundTempSensor);
-TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcdWaterTank, relay);
+TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcdWaterTank, relay, *publisher);
 
 void setup()
 {

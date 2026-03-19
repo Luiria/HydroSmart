@@ -7,6 +7,8 @@
 #include "./hal/Lcd16x2.hpp"
 #include "./hal/Relay.hpp"
 
+#include "./infra/IDataPublisher.hpp"
+
 class TankController
 {
 private:
@@ -15,9 +17,11 @@ private:
     Led &ledWaterTank;
     Lcd16x2 &lcd;
     Relay &relay;
+    IDataPublisher &publisher;
 
 public:
-    TankController(UltraSonicSensor &s, LedBarGraph &l, Led &ledWaterTank, Lcd16x2 &lcd, Relay &relay);
+    TankController(UltraSonicSensor &s, LedBarGraph &l, Led &ledWaterTank,
+                   Lcd16x2 &lcd, Relay &relay, IDataPublisher &publisher);
     void update();
 };
 

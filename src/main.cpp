@@ -16,6 +16,7 @@
 #include "./hal/Lcd16x2.hpp"
 #include "./hal/Potentiometer.hpp"
 #include "./hal/DS18B20.hpp"
+#include "./hal/Relay.hpp"
 
 #include "infra/AdafruitPublisher.hpp"
 
@@ -33,8 +34,9 @@ Lcd16x2 lcdClimatSensors(0x26);
 
 Potentiometer potentiometer(32);
 DS18B20 groundTempSensor(15);
+Relay relay(0);
 
-int ledPins[] = {0, 4, 16, 17, 5, 18, 19, 25, 33, 23};
+int ledPins[] = {2, 4, 16, 17, 5, 18, 19, 25, 33, 23};
 
 DHTSensor sensor(14, DHTesp::DHT22);
 UltraSonicSensor ultraSonicSensor(27, 26);
@@ -43,7 +45,7 @@ LedBarGraph ledBarGraph(ledPins);
 IDataPublisher *publisher = new AdafruitPublisher(IO_USERNAME, IO_KEY, WIFI_SSID, WIFI_PASS);
 
 ClimateController climat(sensor, *publisher, ledConnectedToAdafruit, potentiometer, lcdClimatSensors, groundTempSensor);
-TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcdWaterTank);
+TankController tankController(ultraSonicSensor, ledBarGraph, ledWaterTank, lcdWaterTank, relay);
 
 void setup()
 {
@@ -66,14 +68,14 @@ void setup()
   ledBarGraph.initLed();
 
   ledWaterTank.begin();
+
+  relay.begin();
 }
 
 void loop()
 {
   publisher->run();
   climat.update();
-
-  
 
   tankController.update();
 }

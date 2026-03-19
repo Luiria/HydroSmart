@@ -116,16 +116,26 @@
       "id": "lcd2",
       "top": -876.8,
       "left": 514.4,
-      "attrs": { "pins": "i2c", "i2cAddress" : "0x26" }
+      "attrs": { "pins": "i2c", "i2cAddress": "0x26" }
     },
     { "type": "wokwi-ds18b20", "id": "temp1", "top": -394.73, "left": 397.68, "attrs": {} },
     {
       "type": "wokwi-resistor",
       "id": "r11",
-      "top": -255.25,
-      "left": 384,
-      "attrs": { "value": "4700" }
-    }
+      "top": -236.05,
+      "left": 393.6,
+      "attrs": { "value": "47000" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -374.2, "left": 662.4, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": -435.6,
+      "left": 849,
+      "attrs": { "color": "orange", "flip": "1" }
+    },
+    { "type": "wokwi-vcc", "id": "vcc1", "top": -450.44, "left": 816, "attrs": {} },
+    { "type": "wokwi-gnd", "id": "gnd1", "top": -364.8, "left": 873, "attrs": {} }
   ],
   "connections": [
     [ "esp:TX", "$serialMonitor:RX", "", [] ],
@@ -182,11 +192,17 @@
     [ "lcd2:SCL", "esp:22", "green", [ "h-38.4", "v201.9" ] ],
     [ "lcd2:VCC", "esp:5V", "red", [ "h-48", "v422.5", "h-134.4" ] ],
     [ "lcd2:GND", "esp:GND.2", "black", [ "h-19.2", "v220.8" ] ],
-    [ "esp:5V", "temp1:VCC", "red", [ "h19.35", "v144", "h67.2" ] ],
-    [ "esp:35", "temp1:DQ", "gold", [ "h-47.85", "v249.6", "h124.8" ] ],
-    [ "esp:5V", "r11:1", "red", [ "h9.75", "v211.2" ] ],
-    [ "r11:2", "temp1:DQ", "red", [ "v-48", "h-30" ] ],
-    [ "esp:GND.1", "temp1:GND", "black", [ "h-67.05", "v182.4", "h134.4" ] ]
+    [ "esp:GND.1", "temp1:GND", "black", [ "h-67.05", "v182.4", "h134.4" ] ],
+    [ "temp1:DQ", "esp:15", "gold", [ "v19.2", "h48", "v-163.2" ] ],
+    [ "esp:5V", "r11:1", "red", [ "h0.15", "v230.4" ] ],
+    [ "r11:2", "temp1:DQ", "green", [ "h-39.6", "v-115.2" ] ],
+    [ "r11:1", "temp1:VCC", "red", [ "v19.2", "h86.4", "v-48", "h-48" ] ],
+    [ "relay1:VCC", "esp:5V", "red", [ "h-67.2", "v-76.8", "h-240" ] ],
+    [ "relay1:GND", "esp:GND.3", "black", [ "h-57.6", "v-77.2", "h-86.4", "v-153.6" ] ],
+    [ "relay1:IN", "esp:2", "blue", [ "h-76.8", "v-77", "h-86.4", "v-86.4", "h-9.6" ] ],
+    [ "vcc1:VCC", "relay1:COM", "red", [ "v0" ] ],
+    [ "relay1:NO", "led3:A", "gold", [ "h0" ] ],
+    [ "led3:C", "gnd1:GND", "black", [ "v0" ] ]
   ],
   "dependencies": {}
 }

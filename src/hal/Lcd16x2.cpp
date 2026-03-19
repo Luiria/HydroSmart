@@ -24,13 +24,15 @@ void Lcd16x2::showDataWaterTank(int level, int distance)
     lcd.print("cm");
 }
 
-void Lcd16x2::showDataGroudAndAir(int groundTemp, int AirTemp, int AirHum)
+void Lcd16x2::showDataGroudAndAir(int groundTemp, int groundHum, int AirTemp, int AirHum)
 {
     lcd.clear();
     lcd.setCursor(0, 0);
     lcd.print("gT: " + String(groundTemp) + "%");
     lcd.setCursor(8, 0);
-    lcd.print("aH: " + String(AirHum) + "%");
+    lcd.print("gH: " + String(groundHum) + "%");
     lcd.setCursor(0, 1);
-    lcd.print("aT " + String(AirTemp) + "%");
+    lcd.print("aT: " + String(AirTemp) + "%");
+    lcd.setCursor(8, 1);
+    lcd.print("aH: " + String(AirHum) + "%");
 }

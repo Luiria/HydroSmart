@@ -13,7 +13,7 @@ public:
     Lcd16x2(uint8_t address);
     void begin();
     void showDataWaterTank(int level, int distance);
-    void showDataGroudAndAir(int groundTemp, int AirTemp, int AirHum);
+    void showDataGroudAndAir(int groundTemp, int groundHum, int AirTemp, int AirHum);
 };
 
 #endif

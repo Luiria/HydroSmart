@@ -116,7 +116,7 @@
       "id": "lcd2",
       "top": -953.6,
       "left": 696.8,
-      "attrs": { "pins": "i2c" }
+      "attrs": { "pins": "i2c", "i2cAddress": "0x26" }
     },
     {
       "type": "wokwi-ds18b20",
